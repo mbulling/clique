@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "143503165835",
+    "project_id": "clique-b7cf3",
+    "storage_bucket": "clique-b7cf3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:143503165835:android:ce63d2c1a5f23d899b878e",
+        "android_client_info": {
+          "package_name": "com.example.clique"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "143503165835-qo109qh8hne13c9um0152i7dtf3gt00o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBrRAzbrcBP74jcJ2i36V9EkO9NUDZsTEE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "143503165835-qo109qh8hne13c9um0152i7dtf3gt00o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
