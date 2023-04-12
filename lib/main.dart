@@ -1,16 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:clique/backend/user.dart';
-
-String userIdentity = "000000";
 
 void main() async {
   runApp(const MyApp());
-  userIdentity = await getUser();
-}
-
-Future<String> getUser() async {
-  final String userIdentity = await retrieveUser();
-  return userIdentity;
 }
 
 class MyApp extends StatelessWidget {
@@ -108,7 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
               'device user id:',
             ),
             Text(
-              userIdentity,
+              'test',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
           ],
