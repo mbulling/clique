@@ -10,9 +10,9 @@ String generateUserIdentity() {
 // Retrieve the userIdentity from local storage
 Future<String> retrieveUser() async {
   final prefs = await SharedPreferences.getInstance();
-  String userIdentity = prefs.getString('userIdentity') ?? "";
+  String userIdentity = (prefs.getString('userIdentity')) ?? "000000";
 
-  if (userIdentity == "") {
+  if (userIdentity == "000000") {
     userIdentity = generateUserIdentity();
     await prefs.setString('userIdentity', userIdentity);
   }

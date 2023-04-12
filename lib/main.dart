@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:clique/backend/user.dart';
 
-void main() {
+String userIdentity = "000000";
+
+void main() async {
   runApp(const MyApp());
+  userIdentity = await getUser();
+}
+
+Future<String> getUser() async {
+  final String userIdentity = await retrieveUser();
+  return userIdentity;
 }
 
 class MyApp extends StatelessWidget {
@@ -96,10 +105,10 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text(
-              'You have pushed the button this many times:',
+              'device user id:',
             ),
             Text(
-              '$_counter',
+              userIdentity,
               style: Theme.of(context).textTheme.headlineMedium,
             ),
           ],
