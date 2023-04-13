@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'message.dart';
 import 'region.dart';
 
-//The initializeFirebase() function is used to initialize the Firebase
-//configuration in a Flutter application.
+///The initializeFirebase() function is used to initialize the Firebase
+///configuration in a Flutter application.
 Future<void> initializeFirebase() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -14,7 +14,7 @@ Future<void> initializeFirebase() async {
   );
 }
 
-//Firestore collection references
+///Firestore collection references
 
 final regionsRef =
     FirebaseFirestore.instance.collection('regions').withConverter<Region>(
@@ -28,8 +28,7 @@ final messageRef =
           toFirestore: (message, _) => message.toJson(),
         );
 
-//regions collection functions
-
+/// Retrieves all the regions from Firestore and returns them as a list of [Region] objects.
 Future<List<Region>> getAllRegions() async {
   QuerySnapshot<Region> querySnapshot = await regionsRef.get();
   List<Region> regionsList =
@@ -37,6 +36,13 @@ Future<List<Region>> getAllRegions() async {
   return regionsList;
 }
 
+/// Creates a new region document in Firestore with the given parameters.
+Future<void> createRegion(
+    String name, double latitude, double longitude, double radius) async {
+  await regionsRef.add(Region(latitude, longitude, radius, name));
+}
+
+/// Retrieves a stream of messages from Firestore that belong to the specified region.
 Stream<List<Message>> getMessages(String regionName) {
   return messageRef
       .where('region', isEqualTo: regionName)
