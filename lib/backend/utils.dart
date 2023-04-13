@@ -2,6 +2,7 @@ import 'package:clique/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'message.dart';
 import 'region.dart';
 
@@ -50,4 +51,28 @@ Stream<List<Message>> getMessages(String regionName) {
       .snapshots()
       .map((querySnapshot) =>
           querySnapshot.docs.map((doc) => doc.data()).toList());
+}
+
+/// Retrieves the current location of the device using the Geolocator package.
+Future<Position> getPosition() async {
+  bool serviceEnabled;
+  LocationPermission permission;
+  serviceEnabled = await Geolocator.isLocationServiceEnabled();
+  if (!serviceEnabled) {
+    return Future.error('Location services are disabled.');
+  }
+
+  permission = await Geolocator.checkPermission();
+  if (permission == LocationPermission.denied) {
+    permission = await Geolocator.requestPermission();
+    if (permission == LocationPermission.denied) {
+      return Future.error('Location permissions are denied');
+    }
+  }
+
+  if (permission == LocationPermission.deniedForever) {
+    return Future.error(
+        'Location permissions are permanently denied, we cannot request permissions.');
+  }
+  return await Geolocator.getCurrentPosition();
 }
