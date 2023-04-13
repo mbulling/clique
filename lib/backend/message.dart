@@ -2,20 +2,20 @@ class Message {
   final String text;
   final double latitude;
   final double longitude;
-  final String region;
+  final String regionName;
 
-  Message(this.latitude, this.longitude, this.text, this.region);
+  Message(this.latitude, this.longitude, this.text, this.regionName);
 
   Message.fromJson(Map<String, Object?> json)
       : this(json["latitude"] as double, json["longitude"] as double,
-            json["text"] as String, json["region"] as String);
+            json["text"] as String, json["regionName"] as String);
 
   Map<String, Object?> toJson() {
     return {
       "latitude": latitude,
       "longitude": longitude,
       "text": text,
-      "region": region,
+      "regionName": regionName,
     };
   }
 }

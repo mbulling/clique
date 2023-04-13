@@ -19,6 +19,12 @@ Future<void> initializeFirebase() async {
 final regionsRef =
     FirebaseFirestore.instance.collection('regions').withConverter<Region>(
           fromFirestore: (snapshots, _) => Region.fromJson(snapshots.data()!),
+          toFirestore: (region, _) => region.toJson(),
+        );
+
+final messageRef =
+    FirebaseFirestore.instance.collection('messages').withConverter<Message>(
+          fromFirestore: (snapshots, _) => Message.fromJson(snapshots.data()!),
           toFirestore: (message, _) => message.toJson(),
         );
 
@@ -29,4 +35,13 @@ Future<List<Region>> getAllRegions() async {
   List<Region> regionsList =
       querySnapshot.docs.map((doc) => doc.data()).toList();
   return regionsList;
+}
+
+Stream<List<Message>> getMessages(String regionName) {
+  return messageRef
+      .where('region', isEqualTo: regionName)
+      .orderBy('time', descending: true)
+      .snapshots()
+      .map((querySnapshot) =>
+          querySnapshot.docs.map((doc) => doc.data()).toList());
 }
